@@ -1,42 +1,44 @@
-<h2><a href="https://leetcode.com/problems/contains-duplicate">217. Contains Duplicate</a></h2><h3>Easy</h3><hr><p>Given an integer array <code>nums</code>, return <code>true</code> if any value appears <strong>at least twice</strong> in the array, and return <code>false</code> if every element is distinct.</p>
+# 217. Contains Duplicate
 
-<p>&nbsp;</p>
-<p><strong class="example">Example 1:</strong></p>
+**Difficulty:** Easy  
+**Topic:** Arrays / Hash Set  
+**Link:** [LeetCode 217](https://leetcode.com/problems/contains-duplicate)
 
-<div class="example-block">
-<p><strong>Input:</strong> <span class="example-io">nums = [1,2,3,1]</span></p>
+---
 
-<p><strong>Output:</strong> <span class="example-io">true</span></p>
+## Problem
 
-<p><strong>Explanation:</strong></p>
+Given an integer array `nums`, return `true` if any value appears **at least twice**, and `false` if every element is distinct.
 
-<p>The element 1 occurs at the indices 0 and 3.</p>
-</div>
+---
 
-<p><strong class="example">Example 2:</strong></p>
+## Approach — Hash Set
 
-<div class="example-block">
-<p><strong>Input:</strong> <span class="example-io">nums = [1,2,3,4]</span></p>
+Iterate through the array and track seen elements using a set. If a number is already in the set, return `true` immediately. Otherwise add it and continue.
 
-<p><strong>Output:</strong> <span class="example-io">false</span></p>
+- **Time:** O(n)
+- **Space:** O(n)
 
-<p><strong>Explanation:</strong></p>
+---
 
-<p>All elements are distinct.</p>
-</div>
+## Solution
+```python
+class Solution:
+    def containsDuplicate(self, nums: List[int]) -> bool:
+        seen = set()
+        for num in nums:
+            if num in seen:
+                return True
+            seen.add(num)
+        return False
+```
 
-<p><strong class="example">Example 3:</strong></p>
+---
 
-<div class="example-block">
-<p><strong>Input:</strong> <span class="example-io">nums = [1,1,1,3,3,4,3,2,4,2]</span></p>
+## Examples
 
-<p><strong>Output:</strong> <span class="example-io">true</span></p>
-</div>
-
-<p>&nbsp;</p>
-<p><strong>Constraints:</strong></p>
-
-<ul>
-	<li><code>1 &lt;= nums.length &lt;= 10<sup>5</sup></code></li>
-	<li><code>-10<sup>9</sup> &lt;= nums[i] &lt;= 10<sup>9</sup></code></li>
-</ul>
+| Input | Output |
+|---|---|
+| [1, 2, 3, 1] | true |
+| [1, 2, 3, 4] | false |
+| [1, 1, 1, 3, 3, 4, 3, 2, 4, 2] | true |
