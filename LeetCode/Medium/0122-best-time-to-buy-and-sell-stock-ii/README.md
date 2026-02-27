@@ -39,3 +39,40 @@ Total profit is 4.
 	<li><code>1 &lt;= prices.length &lt;= 3 * 10<sup>4</sup></code></li>
 	<li><code>0 &lt;= prices[i] &lt;= 10<sup>4</sup></code></li>
 </ul>
+
+---
+
+## Approach
+
+This solution is based on a greedy idea: whenever the price increases from one day to the next, that increase can be added to the total profit.
+
+Why this works:
+- if a stock price goes from `1 -> 2 -> 3 -> 4`, then buying at `1` and selling at `4` gives profit `3`
+- this is the same as adding the smaller positive gains:
+  - `(2 - 1) + (3 - 2) + (4 - 3) = 3`
+
+So instead of trying to explicitly track every buy and sell transaction, the algorithm simply adds every positive difference between consecutive days.
+
+In this solution:
+- `left` represents the previous day
+- `right` represents the current day
+- if `prices[right] > prices[left]`, add the profit difference
+- move both pointers forward together
+
+This captures all profitable upward movements in the stock price.
+
+---
+
+## Solution
+
+```python
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        left, right, profit = 0, 1, 0
+
+        while right < len(prices):
+            if prices[left] < prices[right]:
+                profit += prices[right] - prices[left]
+            left += 1
+            right += 1
+        return profit
