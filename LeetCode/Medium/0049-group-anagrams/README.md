@@ -41,3 +41,39 @@
 	<li><code>0 &lt;= strs[i].length &lt;= 100</code></li>
 	<li><code>strs[i]</code> consists of lowercase English letters.</li>
 </ul>
+
+---
+
+## Approach
+
+The key idea is that all anagrams produce the same result when their characters are sorted.
+
+For each string in the input:
+- sort the characters in the string
+- convert the sorted result into a tuple so it can be used as a dictionary key
+- use that tuple as the signature for the anagram group
+- append the original string to the list stored at that key
+
+Since all anagrams share the same sorted-character pattern, they will be grouped together in the same dictionary entry.
+
+A `defaultdict(list)` is useful here because it automatically creates an empty list for a new key.
+
+---
+
+## Solution
+
+```python
+from collections import defaultdict
+
+class Solution:
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        dic = defaultdict(list)
+        res = []
+
+        for string in strs:
+            p = tuple(sorted(string))
+            dic[p].append(string)
+
+        for key, value_list in dic.items():
+            res.append(value_list)
+        return res
