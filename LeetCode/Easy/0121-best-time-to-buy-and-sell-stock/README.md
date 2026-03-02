@@ -1,4 +1,4 @@
-<h2><a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock">121. Best Time to Buy and Sell Stock</a></h2><h3>Easy</h3><hr><p>You are given an array <code>prices</code> where <code>prices[i]</code> is the price of a given stock on the <code>i<sup>th</sup></code> day.</p>
+<h2><a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock">121. Best Time to Buy and Sell Stock</a></h2><h3>Easy</h3><hr><p>You are given an array <code>prices</code> where <code>prices[i]</code> is the price of a given stock on the <code>i<sup>th</code> day.</p>
 
 <p>You want to maximize your profit by choosing a <strong>single day</strong> to buy one stock and choosing a <strong>different day in the future</strong> to sell that stock.</p>
 
@@ -29,3 +29,21 @@ Note that buying on day 2 and selling on day 1 is not allowed because you must b
 	<li><code>1 &lt;= prices.length &lt;= 10<sup>5</sup></code></li>
 	<li><code>0 &lt;= prices[i] &lt;= 10<sup>4</sup></code></li>
 </ul>
+
+---
+
+## Approach
+
+This solution uses a two-pointer technique to track the best day to buy and the current day to potentially sell.
+
+- `left` represents the buying day
+- `right` represents the selling day
+- `maxP` stores the maximum profit found so far
+
+The idea is to scan through the array once:
+
+1. Start with `left = 0` and `right = 1`
+2. If the current selling price is lower than the buying price, move `left` to `right` because a lower buying price gives a better chance of higher profit later
+3. Otherwise, calculate the current profit:
+   ```python
+   prices[right] - prices[left]
