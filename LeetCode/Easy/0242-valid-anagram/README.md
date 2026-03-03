@@ -27,3 +27,34 @@
 
 <p>&nbsp;</p>
 <p><strong>Follow up:</strong> What if the inputs contain Unicode characters? How would you adapt your solution to such a case?</p>
+
+---
+
+## Approach
+
+Two strings are anagrams if they contain the **same characters with the same frequencies**, just possibly in a different order.
+
+One simple way to check this is to **sort both strings** and compare them.
+
+Steps:
+1. Sort string `s`
+2. Sort string `t`
+3. If the sorted versions are equal, the strings contain the same characters in the same counts → they are anagrams
+4. Otherwise, they are not anagrams
+
+Sorting places all characters in lexicographical order, so two anagrams will produce identical sorted strings.
+
+---
+
+## Solution
+
+```python
+class Solution:
+    def isAnagram(self, s: str, t: str) -> bool:
+        s = sorted(s)
+        t = sorted(t)
+
+        if s == t:
+            return True
+        else:
+            return False
