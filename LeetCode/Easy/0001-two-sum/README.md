@@ -39,3 +39,37 @@
 
 <p>&nbsp;</p>
 <strong>Follow-up:&nbsp;</strong>Can you come up with an algorithm that is less than <code>O(n<sup>2</sup>)</code><font face="monospace">&nbsp;</font>time complexity?
+
+---
+
+## Approach
+
+This solution uses a hash map (dictionary) to store numbers that have already been seen along with their indices.
+
+While traversing the array:
+- compute the complement of the current number as `target - nums[i]`
+- check whether that complement already exists in the dictionary
+- if it does, return the stored index and the current index
+- otherwise, store the current number and its index in the dictionary
+
+This works because by the time a number is processed, all previous numbers have already been stored and are available for constant-time lookup.
+
+---
+
+## Solution
+
+```python
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        ind = {}
+        res = []
+        
+        for i in range(len(nums)):
+            if (target - nums[i]) in ind:
+                res.append(ind[target - nums[i]])
+                res.append(i)
+                break
+            else:
+                ind[nums[i]] = i
+        
+        return res
